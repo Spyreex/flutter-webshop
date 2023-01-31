@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:webshop/pages/product_detail_page.dart';
 
 class ProductItem extends StatelessWidget {
   final String id;
   final String title;
   final String imageUrl;
+  final double price;
 
   const ProductItem({
     required this.id,
     required this.title,
     required this.imageUrl,
+    required this.price,
   });
 
   static const snackBar = SnackBar(
@@ -37,7 +40,27 @@ class ProductItem extends StatelessWidget {
               ),
             ],
           )),
-      child: Image.network(imageUrl, fit: BoxFit.cover),
+      child: GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => ProductDetailPage(
+                title: title,
+                id: id,
+                imageUrl: imageUrl,
+                price: price,
+              ),
+            ),
+          );
+        },
+        child: Hero(
+          tag: imageUrl,
+          child: Image.network(
+            imageUrl,
+            fit: BoxFit.cover,
+          ),
+        ),
+      ),
     );
   }
 }

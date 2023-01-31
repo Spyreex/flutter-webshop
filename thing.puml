@@ -1,0 +1,42 @@
+@startuml
+
+class ProductItem {
+string id
+string title
+string imageUrl
+double price
+}
+
+class Product {
+String id
+String title
+String description
+double price
+String imageUrl
+bool isFavorite
+}
+
+class MyApp {
+Widget build()
+}
+
+class ProductDetailPage {
+String id
+String title
+String imageUrl
+double price
+Widget build()
+}
+
+class ProductOverviewPage {
+State<ProductOverviewPage> createState
+}
+
+class _ProductOverviewPageState {
+List<Product> loadedProducts
+Widget build()
+}
+
+ProductOverviewPage --* ProductItem
+
+@enduml

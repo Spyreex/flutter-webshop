@@ -54,18 +54,31 @@ class _ProductOverviewPageState extends State<ProductOverviewPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
-        child: GridView.builder(
-          itemCount: loadedProducts.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 3 / 2,
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
-          ),
-          itemBuilder: (context, i) => ProductItem(
-              id: loadedProducts[i].id,
-              title: loadedProducts[i].title,
-              imageUrl: loadedProducts[i].imageUrl),
+        child: OrientationBuilder(
+          builder: (context, orientation) {
+            return Scrollbar(
+              thumbVisibility: true,
+              thickness: 10,
+              radius: Radius.circular(5),
+              trackVisibility: true,
+              interactive: true,
+              child: GridView.builder(
+                itemCount: loadedProducts.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: orientation == Orientation.portrait ? 1 : 2,
+                  childAspectRatio: 3 / 2,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                ),
+                itemBuilder: (context, i) => ProductItem(
+                  id: loadedProducts[i].id,
+                  title: loadedProducts[i].title,
+                  imageUrl: loadedProducts[i].imageUrl,
+                  price: loadedProducts[i].price,
+                ),
+              ),
+            );
+          },
         ),
       ),
     );
